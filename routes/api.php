@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Resources\EventResource;
+use \App\Models\Event;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/events", function () {
-    return \App\Http\Resources\EventResource::collection(\App\Models\Event::all());
+    return EventResource::collection(Event::all());
 });
 
 Route::get("/events/{id}", function (string $id) {
-    return new \App\Http\Resources\EventResource(\App\Models\Event::findOrFail($id));
+    return new EventResource(Event::findOrFail($id));
 });
